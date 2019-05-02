@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class JoshuaOrderHandler implements ProcessRequest {
 	public static File rawPath = null;
-        public static File path;
+        public static File path = new File(System.getProperty("user.dir"), ProcessRequest.publicFileFolder);
         
 	@Override
 	public int processRequest(Request sock) throws Exception {
