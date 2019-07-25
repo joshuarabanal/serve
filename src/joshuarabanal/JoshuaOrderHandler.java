@@ -171,6 +171,24 @@ public class JoshuaOrderHandler implements ProcessRequest {
         
         Log.i("preprocess", "finished");
     }
+
+	@Override
+	public void saveState(File file) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void openCache(File file) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setRoot(File root) {
+		// TODO Auto-generated method stub
+		
+	}
     
 
 
