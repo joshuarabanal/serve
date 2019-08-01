@@ -48,22 +48,34 @@ public class run {
                 HttpHelpers.addMimeType("sf2", "application/soundfont2");
                 HttpHelpers.addMimeType("mxl", "application/vnd.recordare.musicxml");
                 
-		GoogleDDNS DDNS = new GoogleDDNS("nRmzBwxtqW1V2p9v", "o9zHdAsmU2hkTjFk","joshuarabanal.info");
-		DDNS.start();
+                
+		GoogleDDNS DDNS_joshuarabanal = new GoogleDDNS("nRmzBwxtqW1V2p9v", "o9zHdAsmU2hkTjFk","joshuarabanal.info");
+		DDNS_joshuarabanal.start();
+		
+		GoogleDDNS DDNS_servicefromhome = new GoogleDDNS("aJaiWrNJvbYDUiSk", "NiaWyks9OvTyrpk7", "servicefromhome.com");
+		DDNS_servicefromhome.start();
+		
+		GoogleDDNS DDNS_composemusic = new GoogleDDNS("UJX0Suq5KCMIvo6m", "eFGwLlcuAu4gyepw", "composemusic.org");
+		DDNS_composemusic.start();
+		
 		
 		
 		
 		MultiDomainRequestHandler root = new MultiDomainRequestHandler();
-			Domain d = new Domain(new JoshuaOrderHandler(), "joshuarabanal.info", "www.joshuarabanal.info","joshua.192.168.86.73:4244");
+			Domain d = new Domain(new JoshuaOrderHandler(), 
+					"joshuarabanal.info", "www.joshuarabanal.info", "www.joshuarabanal.info:4244",
+					"joshua.192.168.86.73:4244",
+					"composemusic.org","composemusic.org:4244",
+					"www.composemusic.org"
+				);
 		root.add(d);
-			d = new Domain(new AriseOrderHandler(), "servicefromhome.com","www.servicefromhome.com", "starmatic.192.168.86.73:4244");
+			d = new Domain(new AriseOrderHandler(), 
+					"servicefromhome.com","servicefromhome.com:4244",
+					"www.servicefromhome.com", 
+					"starmatic.192.168.86.73:4244"
+				);
 		root.add(d);
-			/*
-                serv.setSSL(
-                        "C:\\Users\\Joshua\\Google Drive\\program stuff\\music xml\\website\\SSL\\joshuarabanal.info.csr",
-                        "SU0798ni"
-                );
-		*/
+			
 
 		serv = new ServerSock(root,srcFolder, cache);
 		serv.startServer();
