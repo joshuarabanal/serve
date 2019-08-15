@@ -35,8 +35,7 @@ public class PreProcessor {
         InlineCSS css = new InlineCSS(f);
         css.run();
         Log.i("inline css", "lasted:"+((System.currentTimeMillis()-time)/1000f)+" seconds"); time = System.currentTimeMillis();
-        
-        deleteCssFiles(f);
+        css.deleteCssFiles();
         Log.i("delete css", "lasted:"+((System.currentTimeMillis()-time)/1000f)+" seconds"); time = System.currentTimeMillis();
         
         
@@ -52,15 +51,9 @@ public class PreProcessor {
             Dir_JSOn_builder.buildDir_JSONinDirs(f);
         Log.i("dir.json", "lasted:"+((System.currentTimeMillis()-time)/1000f)+" seconds"); time = System.currentTimeMillis();
         
+        GZipFIles.GZipFilesInFolderInNewThread(f);
         
-        new Thread(new Runnable(){
-            public void run(){
-                Log.i("gzip dir", "start");
-                long time = System.currentTimeMillis();
-                GZipFIles.GZipFilesInFolder(f);
-                Log.i("gzip dir", "lasted:"+((System.currentTimeMillis()-time)/1000f)+" seconds"); 
-            }
-        }).start();
+        
         
         
         
