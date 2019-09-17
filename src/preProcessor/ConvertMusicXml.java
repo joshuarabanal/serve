@@ -20,7 +20,6 @@ import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 import joshuarabanal.FirebaseFunctions;
 import joshuarabanal.PreProcessor;
-import netscape.javascript.JSObject;
 import xml.NameValuePairList;
 import xml.XmlCursor;
 import xml.unoptimized.NameValuePair;

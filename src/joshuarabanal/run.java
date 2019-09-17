@@ -5,7 +5,6 @@
  */
 package joshuarabanal;
 
-import android.util.Log;
 import arise.server.AriseOrderHandler;
 import basicServer.GoogleDDNS;
 import basicServer.HttpHelpers;
@@ -13,13 +12,8 @@ import basicServer.ServerSock;
 import basicServer.custom.MultiDomainRequestHandler;
 import basicServer.custom.multiDomainRequestsHandler.Domain;
 
-import com.sun.net.httpserver.HttpsConfigurator;
-import com.sun.net.httpserver.HttpsParameters;
-import com.sun.net.httpserver.HttpsServer;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.PrintStream;
-import java.net.InetAddress;
 
 /**
  *
