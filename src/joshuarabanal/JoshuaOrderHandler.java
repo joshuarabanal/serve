@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class JoshuaOrderHandler implements ProcessRequest {
 	public static File rawPath = null;
-        public static File path = new File(System.getProperty("user.dir"), ProcessRequest.publicFileFolder);
+        public static File path = null;
         
 	@Override
 	public int processRequest(Request sock) throws Exception {
@@ -114,7 +114,7 @@ public class JoshuaOrderHandler implements ProcessRequest {
         private byte[] b;
     private File MoveFile(File oldFile, File newDirectory) throws FileNotFoundException, IOException{
         if(newDirectory == null){
-            newDirectory = new File(System.getProperty("user.dir"), ProcessRequest.publicFileFolder);
+            newDirectory = path;
             PreProcessor.deleteFolder(newDirectory);
             newDirectory.mkdir();
             File[] childs = oldFile.listFiles();
@@ -187,7 +187,7 @@ public class JoshuaOrderHandler implements ProcessRequest {
 	@Override
 	public void setRoot(File root) {
 		// TODO Auto-generated method stub
-		
+		this.path = root;
 	}
     
 
