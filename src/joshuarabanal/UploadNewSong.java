@@ -81,7 +81,7 @@ public class UploadNewSong {
     private static File createXmlFile(String title){
         title = FirebaseFunctions.htmlEncode(title);
         int i = 0;
-        File retu = new File(JoshuaOrderHandler.path,"/userUploads/");
+        File retu = new File(JoshuaOrderHandler.serverRoot,"/userUploads/");
         retu.mkdirs();
         retu = new File(retu,title+".xml");
         while(retu.exists()){

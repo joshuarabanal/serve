@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class JoshuaOrderHandler implements ProcessRequest {
 	public static File rawPath = null;
-        public static File path = new File(System.getProperty("user.dir"), ProcessRequest.publicFileFolder);
+        public static File serverRoot;
         
 	@Override
 	public int processRequest(Request sock) throws Exception {
@@ -27,12 +27,12 @@ public class JoshuaOrderHandler implements ProcessRequest {
 		switch(sock.getMethod()){
 		case Request.METHOD_GET:
                         String url = sock.getURL();
-			File f = HttpHelpers.getFileFromUrl(path, url);//new File(path, url);
+			File f = HttpHelpers.getFileFromUrl(serverRoot, url);//new File(path, url);
 			if (f.exists()){ 
 				HttpHelpers.httpGetResponse(sock, f); 
 			}
-                        else if(new File(path,url+".html").exists()){
-                            HttpHelpers.httpGetResponse(sock, new File(path,url+".html")); 
+                        else if(new File(serverRoot,url+".html").exists()){
+                            HttpHelpers.httpGetResponse(sock, new File(serverRoot,url+".html")); 
                         }
                         else if(url.contains("?") && url.contains("q=")){
                             handleQuery(sock);
@@ -99,12 +99,12 @@ public class JoshuaOrderHandler implements ProcessRequest {
         }
         
         if(
-                new File(path, folderUrl+"/"+query).exists()
+                new File(serverRoot, folderUrl+"/"+query).exists()
         ){//get path to query string
-            HttpHelpers.httpGetResponse(sock, new File(path, folderUrl+"/"+query)); 
+            HttpHelpers.httpGetResponse(sock, new File(serverRoot, folderUrl+"/"+query)); 
         }
-        else if(new File(path,url).exists()){//revert to original path
-            HttpHelpers.httpGetResponse(sock, new File(path, url)); 
+        else if(new File(serverRoot,url).exists()){//revert to original path
+            HttpHelpers.httpGetResponse(sock, new File(serverRoot, url)); 
         }
         else{
             throw new FileNotFoundException("failed to find directory:"+sock.getURL());
@@ -114,7 +114,10 @@ public class JoshuaOrderHandler implements ProcessRequest {
         private byte[] b;
     private File MoveFile(File oldFile, File newDirectory) throws FileNotFoundException, IOException{
         if(newDirectory == null){
-            newDirectory = new File(System.getProperty("user.dir"), ProcessRequest.publicFileFolder);
+            newDirectory = serverRoot;
+            if(newDirectory == null) {
+            	throw new NullPointerException("server root was not set correctly");
+            }
             PreProcessor.deleteFolder(newDirectory);
             newDirectory.mkdir();
             File[] childs = oldFile.listFiles();
@@ -159,9 +162,9 @@ public class JoshuaOrderHandler implements ProcessRequest {
             ArrayList<String> dynamicUrls = new ArrayList<String>();
             Log.i("pre process", rawPath.toString());
             long time  = System.currentTimeMillis();
-            path = MoveFile(rawPath,null);
+            serverRoot = MoveFile(rawPath,null);
             Log.i("moved entire directory in", ((System.currentTimeMillis()-time)/1000f)+"");
-            PreProcessor.process(path, dynamicUrls);
+            PreProcessor.process(serverRoot, dynamicUrls);
         }
         catch(Exception e){
             Log.i("exception","exception");
@@ -173,21 +176,17 @@ public class JoshuaOrderHandler implements ProcessRequest {
     }
 
 	@Override
-	public void saveState(File file) {
+	public void saveState() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void openCache(File file) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void setRoot(File root) {
 		// TODO Auto-generated method stub
-		
+		serverRoot = new File(root,"publicFilesDirectory");
 	}
     
 

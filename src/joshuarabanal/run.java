@@ -32,7 +32,6 @@ public class run {
 		ServerSock serv;
 		File path = new File(System.getProperty("user.dir"));
 		File srcFolder = new File(path,"src"); srcFolder.mkdirs();
-		File cache = new File(path,"cache"); cache.mkdirs();
 		
 		if(false){
 			System.setOut(new PrintStream(new File(path,"logs.txt")));
@@ -58,20 +57,18 @@ public class run {
 		MultiDomainRequestHandler root = new MultiDomainRequestHandler();
 			Domain d = new Domain(new JoshuaOrderHandler(), 
 					"joshuarabanal.info", "www.joshuarabanal.info", "www.joshuarabanal.info:4244",
-					"joshua.192.168.86.73:4244",
 					"composemusic.org","composemusic.org:4244",
 					"www.composemusic.org"
 				);
 		root.add(d);
 			d = new Domain(new AriseOrderHandler(), 
 					"servicefromhome.com","servicefromhome.com:4244",
-					"www.servicefromhome.com", 
-					"starmatic.192.168.86.73:4244"
+					"www.servicefromhome.com"
 				);
 		root.add(d);
 			
 
-		serv = new ServerSock(root,srcFolder, cache);
+		serv = new ServerSock(root,srcFolder);
 		serv.startServer();
 		//stream.close();
 	}
