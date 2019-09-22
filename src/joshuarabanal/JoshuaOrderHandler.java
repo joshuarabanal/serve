@@ -18,7 +18,11 @@ import java.util.ArrayList;
 
 public class JoshuaOrderHandler implements ProcessRequest {
 	public static File rawPath = null;
+<<<<<<< HEAD
         public static File serverRoot;
+=======
+        public static File path = null;
+>>>>>>> 8b5993c5650fa6bc6ebf2169b64f7a9c7c52b5e5
         
 	@Override
 	public int processRequest(Request sock) throws Exception {
@@ -114,10 +118,14 @@ public class JoshuaOrderHandler implements ProcessRequest {
         private byte[] b;
     private File MoveFile(File oldFile, File newDirectory) throws FileNotFoundException, IOException{
         if(newDirectory == null){
+<<<<<<< HEAD
             newDirectory = serverRoot;
             if(newDirectory == null) {
             	throw new NullPointerException("server root was not set correctly");
             }
+=======
+            newDirectory = path;
+>>>>>>> 8b5993c5650fa6bc6ebf2169b64f7a9c7c52b5e5
             PreProcessor.deleteFolder(newDirectory);
             newDirectory.mkdir();
             File[] childs = oldFile.listFiles();
@@ -186,7 +194,11 @@ public class JoshuaOrderHandler implements ProcessRequest {
 	@Override
 	public void setRoot(File root) {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		serverRoot = new File(root,"publicFilesDirectory");
+=======
+		this.path = root;
+>>>>>>> 8b5993c5650fa6bc6ebf2169b64f7a9c7c52b5e5
 	}
     
 
