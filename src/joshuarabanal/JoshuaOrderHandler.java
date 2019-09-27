@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class JoshuaOrderHandler implements ProcessRequest {
 	public static File rawPath = null;
         public static File serverRoot;
-        public static File path = null;
         
 	@Override
 	public int processRequest(Request sock) throws Exception {
@@ -187,7 +186,7 @@ public class JoshuaOrderHandler implements ProcessRequest {
 	@Override
 	public void setRoot(File root) {
 		// TODO Auto-generated method stub
-		this.path = root;
+		this.serverRoot = root;
 	}
     
 
