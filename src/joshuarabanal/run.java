@@ -16,6 +16,8 @@ import vpn.VpnOrderHandler;
 import java.io.File;
 import java.io.PrintStream;
 
+import android.util.Log;
+
 /**
  *
  * @author Joshua 
@@ -33,6 +35,7 @@ public class run {
 		ServerSock serv;
 		File path = new File(System.getProperty("user.dir"));
 		File srcFolder = new File(path,"src"); srcFolder.mkdirs();
+		Log.i("root directory set", ""+srcFolder);
 		
 		if(false){
 			System.setOut(new PrintStream(new File(path,"logs.txt")));
@@ -74,7 +77,8 @@ public class run {
 	
 		d = new Domain(new VpnOrderHandler("arise.com", "servicefromhome.com"), 
 				"portal.servicefromhome.com",
-				"starmatic.servicefromhome.com"
+				"starmatic.servicefromhome.com",
+				"link.servicefromhome.com"
 			);
 		root.add(d);
 		
